@@ -1,15 +1,17 @@
-import Footer from './components/footer/Footer';
-import Header from './components/header/Header';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import HomePage from './views/home/Home';
+import TODOPage from './views/TODO/TODO';
 
 const App = () => {
   return (
-    <>
-      <Header />
-      <main>
-        <h1>Productivity App</h1>
-      </main>
-      <Footer />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route>
+          <Route index element={<HomePage />} />
+          <Route path="/todo" element={<TODOPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 
