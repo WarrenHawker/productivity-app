@@ -1,0 +1,46 @@
+/* CSS variables */
+:root {
+  --color-bg-gradient: linear-gradient(
+    130deg,
+    #1a1a1a 0%,
+    #3b6b41 15%,
+    #3b6b41 25%,
+    #264e2a 40%,
+    #264e2a 55%,
+    #265828 70%,
+    #377a3b 100%
+  );
+  --color-bg-light: #e4f1d7;
+  --color-bg-dark: #22352f;
+  --color-text-dark: #2c2c2c;
+  --color-text-light: #f9e3b1;
+}
+
+/* resets and layout */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--color-bg-gradient);
+}
+
+main {
+  flex-grow: 1;
+}
+
+h1 {
+  color: var(--color-text-dark);
+  background-color: var(--color-bg-light);
+  margin-top: 0;
+}
