@@ -44,3 +44,14 @@ h1 {
   background-color: var(--color-bg-light);
   margin-top: 0;
 }
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* .css-cyr08h {
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.5;
+} */
