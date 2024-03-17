@@ -1,0 +1,30 @@
+.task-section {
+  cursor: pointer;
+  padding: 0 1em;
+}
+
+.task-section h2 {
+  color: var(--color-text-light);
+  text-transform: capitalize;
+  /* padding-left: 0.5em; */
+}
+
+.task-section-inner {
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+  border-bottom: 4px solid var(--color-bg-dark);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px);
+  gap: 1em;
+  justify-content: start;
+}
+
+.no-task {
+  color: var(--color-text-light);
+}
+
+@media screen and (max-width: 650px) {
+  .task-section-inner {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,41 @@
+.task-card {
+  background-color: var(--color-bg-light);
+  border-radius: 10px;
+}
+
+.task-card-inner {
+  padding: 1em;
+}
+
+.task-card .task-card-inner h2 {
+  color: var(--color-text-dark);
+}
+
+.task-card-inner h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+.priority-div {
+  height: 20px;
+  border-radius: 10px 10px 0 0;
+}
+
+.task-status {
+  width: max-content;
+  padding: 0.25em 0.5em;
+  border-radius: 15px;
+  margin-bottom: 2em;
+  text-transform: uppercase;
+}
+
+.category {
+  margin-top: 1.5em;
+}
+
+.category p {
+  color: grey;
+  margin-bottom: 0.25em;
+}

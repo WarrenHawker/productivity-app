@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import useFetchTasks from '../../hooks/tasks/useFetchTasks';
 import { TaskData } from '../../types/task';
 import TaskCard from './components/taskCard/TaskCard';
+import styles from './TasksView.module.css';
 
 const TasksView = () => {
   const { data, status, error } = useFetchTasks();
@@ -35,7 +36,7 @@ const TasksView = () => {
   if (status == 'pending') {
     return (
       <>
-        <h3 className="center">Loading...</h3>
+        <h3>Loading...</h3>
       </>
     );
   }
@@ -43,9 +44,9 @@ const TasksView = () => {
   if (status == 'error') {
     return (
       <>
-        <h1 className="page-title">Tasks</h1>
+        <h1>Tasks</h1>
         <div>
-          <h3 className="center error">{(error as Error).message}</h3>
+          <h3>{(error as Error).message}</h3>
         </div>
       </>
     );
@@ -66,17 +67,21 @@ const TasksView = () => {
                 (task: TaskData) => task[sortedBy as keyof TaskData] === section
               );
               return (
-                <section key={index}>
+                <section key={index} className={styles['task-section']}>
                   <h2>
                     {sortedBy}: {section}
                   </h2>
-                  {filteredTasks.length > 0 ? (
-                    filteredTasks.map((task: TaskData) => (
-                      <TaskCard key={task._id} data={task} />
-                    ))
-                  ) : (
-                    <h3>No tasks found in this section</h3>
-                  )}
+                  <div className={styles['task-section-inner']}>
+                    {filteredTasks.length > 0 ? (
+                      filteredTasks.map((task: TaskData) => (
+                        <TaskCard key={task._id} data={task} />
+                      ))
+                    ) : (
+                      <h3 className={styles['no-task']}>
+                        No tasks found in this section
+                      </h3>
+                    )}
+                  </div>
                 </section>
               );
             })}
