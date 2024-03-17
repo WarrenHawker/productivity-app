@@ -15,9 +15,19 @@ export interface ITask extends Document {
 }
 
 export interface TaskSearchData {
+  title?: { $regex: string; $options: string };
+  content?: { $regex: string; $options: string };
+  category?: { $regex: string; $options: string };
+  priority?: TaskPriority;
+  status?: TaskStatus;
+}
+
+export interface TaskUdateData {
   title?: string;
   content?: string;
   category?: string;
   priority?: TaskPriority;
   status?: TaskStatus;
+  due_date?: Date;
+  updated_on: Date;
 }

@@ -15,21 +15,21 @@ export const getTasks = async (req: Request, res: Response) => {
   if (title) {
     title = escape(title as string).trim();
     if (!isEmpty(title, { ignore_whitespace: true })) {
-      searchData.title = title as string;
+      searchData.title = { $regex: title, $options: 'i' };
     }
   }
 
   if (content) {
     content = escape(content as string).trim();
     if (!isEmpty(content, { ignore_whitespace: true })) {
-      searchData.content = content as string;
+      searchData.content = { $regex: content, $options: 'i' };
     }
   }
 
   if (category) {
     category = escape(category as string).trim();
     if (!isEmpty(category, { ignore_whitespace: true })) {
-      searchData.category = category as string;
+      searchData.category = { $regex: category, $options: 'i' };
     }
   }
 
@@ -118,7 +118,7 @@ export const getTasks = async (req: Request, res: Response) => {
       totalPages: tasks.totalPages,
       numberOfResults: tasks.docs.length,
       totalNumberOfResults: tasks.totalDocs,
-      logs: tasks.docs,
+      tasks: tasks.docs,
     };
     res.status(200).json(result);
     return;
