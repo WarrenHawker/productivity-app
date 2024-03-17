@@ -11,3 +11,16 @@ export type FetchTaskOptions = {
   limit?: number;
   queryKey?: string[];
 };
+
+export type TaskData = {
+  title: string;
+  content: string;
+  category: string;
+  priority: TaskPriority;
+  status: TaskStatus;
+  due_date?: string | Date;
+  created_on: string | Date;
+  updated_on?: string | Date;
+  __v: number;
+  _id: string;
+};

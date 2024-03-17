@@ -1,6 +1,6 @@
 import Layout from '../../components/layout/Layout';
 
-const HomePage = () => {
+const HomeView = () => {
   return (
     <Layout>
       <main>
@@ -10,4 +10,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default HomeView;
