@@ -1,4 +1,4 @@
-import { MarkdownRenderer } from '../../../../components/markdown/Markdown';
+// import { MarkdownRenderer } from '../../../../components/markdown/Markdown';
 import { TaskData } from '../../../../types/task';
 import { formatDate } from '../../../../utils/functions';
 import { useEffect } from 'react';
@@ -8,7 +8,7 @@ interface Props {
 }
 
 const TaskCard = ({ data }: Props) => {
-  const { status, priority, title, category, due_date, content } = data;
+  const { status, priority, title, category, due_date } = data;
   
   useEffect(() => {
     import('./TaskCard.css')
