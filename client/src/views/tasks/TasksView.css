@@ -1,12 +1,10 @@
 .task-section {
-  cursor: pointer;
   padding: 0 1em;
 }
 
 .task-section h2 {
   color: var(--color-text-light);
   text-transform: capitalize;
-  /* padding-left: 0.5em; */
 }
 
 .task-section-inner {

@@ -1,6 +1,7 @@
 .task-card {
   background-color: var(--color-bg-light);
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .task-card-inner {
