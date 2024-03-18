@@ -3,13 +3,16 @@ import { useEffect, useState } from 'react';
 import useFetchTasks from '../../hooks/tasks/useFetchTasks';
 import { TaskData } from '../../types/task';
 import TaskCard from './components/taskCard/TaskCard';
-import styles from './TasksView.module.css';
 
 const TasksView = () => {
   const { data, status, error } = useFetchTasks();
   const [sortedBy, setSortedBy] = useState<string>('priority');
   const [sections, setSections] = useState<string[]>(['high', 'medium', 'low']);
 
+  useEffect(() => {
+    import('./TasksView.css');
+  },[])
+  
   useEffect(() => {
     switch (sortedBy) {
       case 'priority':
@@ -67,17 +70,17 @@ const TasksView = () => {
                 (task: TaskData) => task[sortedBy as keyof TaskData] === section
               );
               return (
-                <section key={index} className={styles['task-section']}>
+                <section key={index} className='task-section'>
                   <h2>
                     {sortedBy}: {section}
                   </h2>
-                  <div className={styles['task-section-inner']}>
+                  <div className='task-section-inner'>
                     {filteredTasks.length > 0 ? (
                       filteredTasks.map((task: TaskData) => (
                         <TaskCard key={task._id} data={task} />
                       ))
                     ) : (
-                      <h3 className={styles['no-task']}>
+                      <h3 className='no-task'>
                         No tasks found in this section
                       </h3>
                     )}

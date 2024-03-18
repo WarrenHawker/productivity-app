@@ -1,7 +1,7 @@
 import { MarkdownRenderer } from '../../../../components/markdown/Markdown';
 import { TaskData } from '../../../../types/task';
-import styles from './TaskCard.module.css';
 import { formatDate } from '../../../../utils/functions';
+import { useEffect } from 'react';
 
 interface Props {
   data: TaskData;
@@ -9,6 +9,10 @@ interface Props {
 
 const TaskCard = ({ data }: Props) => {
   const { status, priority, title, category, due_date, content } = data;
+  
+  useEffect(() => {
+    import('./TaskCard.css')
+  },[])
 
   let statusBGColor = '';
   let statusTextColor = '';
@@ -53,17 +57,17 @@ const TaskCard = ({ data }: Props) => {
   };
 
   return (
-    <article className={styles['task-card']}>
-      <div style={priorityDivStyle} className={styles['priority-div']}></div>
-      <div className={styles['task-card-inner']}>
-        <p className={styles['task-status']} style={statusStyle}>
+    <article className='task-card'>
+      <div style={priorityDivStyle} className='priority-div'></div>
+      <div className='task-card-inner'>
+        <p className='task-status' style={statusStyle}>
           {status}
         </p>
         <h2>{title}</h2>
         {due_date && (
-          <p className={styles['due-date']}>{formatDate(due_date)}</p>
+          <p className='due-date'>{formatDate(due_date)}</p>
         )}
-        <div className={styles['category']}>
+        <div className='category'>
           <p>Category</p>
           <h4>{category}</h4>
         </div>
