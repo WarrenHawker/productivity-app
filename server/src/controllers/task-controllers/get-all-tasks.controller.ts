@@ -23,7 +23,7 @@ export const getAllTasks = async (req: Request, res: Response) => {
       //fetch all tasks included completed
       try {
         const tasks = await Task.find();
-        res.status(200).json(tasks);
+        res.status(200).json({ tasks: tasks });
         return;
       } catch (err) {
         const error: ErrorReturn = {
@@ -40,7 +40,7 @@ export const getAllTasks = async (req: Request, res: Response) => {
       const tasks = await Task.find({
         status: { $in: ['not started', 'started'] },
       });
-      res.status(200).json(tasks);
+      res.status(200).json({ tasks: tasks });
     } catch (err) {
       const error: ErrorReturn = {
         code: 500,

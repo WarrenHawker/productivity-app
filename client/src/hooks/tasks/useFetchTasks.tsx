@@ -11,7 +11,7 @@ export const fetchTasks = async (url: string) => {
 };
 
 const useFetchTasks = (options?: FetchTaskOptions) => {
-  let fetchUrl = `${import.meta.env.VITE_API_BASE_URL}/task`;
+  let fetchUrl = `${import.meta.env.VITE_API_BASE_URL}/task/all`;
 
   if (options) {
     if (options.title) {
