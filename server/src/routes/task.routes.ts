@@ -4,10 +4,13 @@ import { deleteTask } from '../controllers/task-controllers/delete-task.controll
 import { getTaskById } from '../controllers/task-controllers/get-task.controller';
 import { getTasks } from '../controllers/task-controllers/get-tasks.controller';
 import { updateTask } from '../controllers/task-controllers/update-task.controller';
+import { getAllTasks } from '../controllers/task-controllers/get-all-tasks.controller';
 
 export const router = express.Router();
 
 router.get('/', getTasks);
+
+router.get('/all', getAllTasks);
 
 router.get('/:id', getTaskById);
 

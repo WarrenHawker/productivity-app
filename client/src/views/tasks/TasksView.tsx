@@ -3,16 +3,18 @@ import { useEffect, useState } from 'react';
 import useFetchTasks from '../../hooks/tasks/useFetchTasks';
 import { TaskData } from '../../types/task';
 import TaskCard from './components/taskCard/TaskCard';
+import useCreateTask from '../../hooks/tasks/useCreateTask';
 
 const TasksView = () => {
   const { data, status, error } = useFetchTasks();
   const [sortedBy, setSortedBy] = useState<string>('priority');
   const [sections, setSections] = useState<string[]>(['high', 'medium', 'low']);
 
+  console.log('data', data);
   useEffect(() => {
     import('./TasksView.css');
-  },[])
-  
+  }, []);
+
   useEffect(() => {
     switch (sortedBy) {
       case 'priority':
@@ -34,7 +36,15 @@ const TasksView = () => {
     }
   }, [sortedBy]);
 
-  console.log(data);
+  const { mutateAsync: createMutate, status: createStatus } = useCreateTask();
+
+  if (createStatus == 'pending') {
+    return (
+      <>
+        <h3>creating task...</h3>
+      </>
+    );
+  }
 
   if (status == 'pending') {
     return (
@@ -44,7 +54,7 @@ const TasksView = () => {
     );
   }
 
-  if (status == 'error') {
+  if (status == 'error' || createStatus == 'error') {
     return (
       <>
         <h1>Tasks</h1>
@@ -55,10 +65,21 @@ const TasksView = () => {
     );
   }
 
+  const createNewTask = async () => {
+    await createMutate({
+      title: 'hello world 16',
+      content: 'this is the hello world test',
+      category: 'testing',
+      priority: 'high',
+      status: 'not started',
+    });
+  };
+
   return (
     <Layout>
       <main>
         <h1>Tasks page</h1>
+        <button onClick={createNewTask}>create task</button>
         <button onClick={() => setSortedBy('status')}>sort by status</button>
         <button onClick={() => setSortedBy('category')}>
           sort by category
@@ -70,17 +91,17 @@ const TasksView = () => {
                 (task: TaskData) => task[sortedBy as keyof TaskData] === section
               );
               return (
-                <section key={index} className='task-section'>
+                <section key={index} className="task-section">
                   <h2>
                     {sortedBy}: {section}
                   </h2>
-                  <div className='task-section-inner'>
+                  <div className="task-section-inner">
                     {filteredTasks.length > 0 ? (
                       filteredTasks.map((task: TaskData) => (
                         <TaskCard key={task._id} data={task} />
                       ))
                     ) : (
-                      <h3 className='no-task'>
+                      <h3 className="no-task">
                         No tasks found in this section
                       </h3>
                     )}

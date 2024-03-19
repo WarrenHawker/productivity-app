@@ -15,3 +15,9 @@ export const isNumber = (input: string): boolean => {
     return false;
   } else return true;
 };
+
+export const isBoolean = (input: string): boolean => {
+  if (input == 'true' || input == 'false') {
+    return true;
+  } else return false;
+};
