@@ -21,6 +21,21 @@
   color: var(--color-text-light);
 }
 
+.task-view-header {
+  background-color: var(--color-bg-light);
+  padding-top: 1em;
+}
+
+.task-view-header-inner {
+  max-width: 1000px;
+  margin: auto;
+  display: flex;
+}
+
+.task-view-header h1 {
+  text-align: center;
+}
+
 @media screen and (max-width: 650px) {
   .task-section-inner {
     justify-content: center;

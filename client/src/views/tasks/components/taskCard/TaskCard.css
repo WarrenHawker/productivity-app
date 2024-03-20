@@ -1,5 +1,6 @@
 .task-card {
   background-color: var(--color-bg-light);
+  height: 250px;
   border-radius: 10px;
   cursor: pointer;
 }

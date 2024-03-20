@@ -4,7 +4,7 @@ import { isBoolean } from '../../utils/functions';
 import { ErrorReturn } from '../../types/error-return';
 import { Task } from '../../models/task.model';
 
-const { isEmpty, escape } = validator;
+const { escape } = validator;
 
 export const getAllTasks = async (req: Request, res: Response) => {
   let { completed } = req.query;

@@ -14,6 +14,7 @@
   --color-bg-dark: #22352f;
   --color-text-dark: #2c2c2c;
   --color-text-light: #f9e3b1;
+  --color-brown: #503b2e;
 }
 
 /* resets and layout */
@@ -48,4 +49,22 @@ h1 {
 section {
   max-width: 1000px;
   margin: auto;
+}
+
+.btn-primary {
+  background-color: var(--color-brown);
+  color: white;
+  padding: 0.5em 1em;
+  border-radius: 10px;
+  font-size: 20px;
+  display: block;
+  margin: 1em auto;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-bg-light);
+  color: var(--color-brown);
 }

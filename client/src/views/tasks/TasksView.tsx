@@ -1,6 +1,6 @@
 import Layout from '../../components/layout/Layout';
 import { useEffect, useState } from 'react';
-import useFetchTasks from '../../hooks/tasks/useFetchTasks';
+import useFetchTasks, { fetchTasks } from '../../hooks/tasks/useFetchTasks';
 import { TaskData } from '../../types/task';
 import TaskCard from './components/taskCard/TaskCard';
 import useCreateTask from '../../hooks/tasks/useCreateTask';
@@ -9,8 +9,10 @@ const TasksView = () => {
   const { data, status, error } = useFetchTasks();
   const [sortedBy, setSortedBy] = useState<string>('priority');
   const [sections, setSections] = useState<string[]>(['high', 'medium', 'low']);
+  const [searchText, setSearchText] = useState('');
 
-  console.log('data', data);
+  const { mutateAsync: createMutate, status: createStatus } = useCreateTask();
+
   useEffect(() => {
     import('./TasksView.css');
   }, []);
@@ -36,7 +38,12 @@ const TasksView = () => {
     }
   }, [sortedBy]);
 
-  const { mutateAsync: createMutate, status: createStatus } = useCreateTask();
+  useEffect(() => {
+    const searchTasks = setTimeout(async () => {
+      await fetchTasks(searchText);
+    }, 2000);
+    return () => clearTimeout(searchTasks);
+  }, [searchText]);
 
   if (createStatus == 'pending') {
     return (
@@ -67,25 +74,42 @@ const TasksView = () => {
 
   const createNewTask = async () => {
     await createMutate({
-      title: 'hello world 17',
+      title: 'hello world 19',
       content: 'this is the hello world test',
       category: 'testing',
       priority: 'high',
-      status: 'not started',
+      status: 'completed',
     });
   };
 
   return (
     <Layout>
+      <div className="task-view-header">
+        <h1>Tasks</h1>
+        <div className="task-view-header-inner">
+          <input
+            type="text"
+            placeholder="search"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+          <button onClick={createNewTask} className="btn-primary">
+            create task
+          </button>
+          <button onClick={() => setSortedBy('status')} className="btn-primary">
+            sort by status
+          </button>
+          <button
+            onClick={() => setSortedBy('category')}
+            className="btn-primary"
+          >
+            sort by category
+          </button>
+        </div>
+      </div>
       <main>
-        <h1>Tasks page</h1>
-        <button onClick={createNewTask}>create task</button>
-        <button onClick={() => setSortedBy('status')}>sort by status</button>
-        <button onClick={() => setSortedBy('category')}>
-          sort by category
-        </button>
         {data.tasks.length > 0 ? (
-          <div>
+          <>
             {sections.map((section, index) => {
               const filteredTasks = data.tasks.filter(
                 (task: TaskData) => task[sortedBy as keyof TaskData] === section
@@ -109,7 +133,7 @@ const TasksView = () => {
                 </section>
               );
             })}
-          </div>
+          </>
         ) : (
           <h3>No tasks found</h3>
         )}
