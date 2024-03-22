@@ -5,14 +5,15 @@ import { useEffect } from 'react';
 
 interface Props {
   data: TaskData;
+  setSelected: (task: TaskData) => void;
 }
 
-const TaskCard = ({ data }: Props) => {
+const TaskCard = ({ data, setSelected }: Props) => {
   const { status, priority, title, category, due_date } = data;
-  
+
   useEffect(() => {
-    import('./TaskCard.css')
-  },[])
+    import('./TaskCard.css');
+  }, []);
 
   let statusBGColor = '';
   let statusTextColor = '';
@@ -57,17 +58,15 @@ const TaskCard = ({ data }: Props) => {
   };
 
   return (
-    <article className='task-card'>
-      <div style={priorityDivStyle} className='priority-div'></div>
-      <div className='task-card-inner'>
-        <p className='task-status' style={statusStyle}>
+    <article className="task-card" onClick={() => setSelected(data)}>
+      <div style={priorityDivStyle} className="priority-div"></div>
+      <div className="task-card-inner">
+        <p className="task-status" style={statusStyle}>
           {status}
         </p>
         <h2>{title}</h2>
-        {due_date && (
-          <p className='due-date'>{formatDate(due_date)}</p>
-        )}
-        <div className='category'>
+        {due_date && <p className="due-date">{formatDate(due_date)}</p>}
+        <div className="category">
           <p>Category</p>
           <h4>{category}</h4>
         </div>

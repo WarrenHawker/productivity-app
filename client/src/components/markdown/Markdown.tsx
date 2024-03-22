@@ -6,7 +6,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { nightOwl } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 type MarkdownRendererProps = {
-  children: string;
+  children: string | undefined;
 };
 
 export function MarkdownRenderer({

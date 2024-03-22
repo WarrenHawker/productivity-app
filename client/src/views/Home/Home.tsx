@@ -1,6 +1,10 @@
-import Layout from '../../components/layout/Layout';
+import { useEffect } from 'react';
+import Layout from '../../components/Layout/Layout';
 
 const HomeView = () => {
+  useEffect(() => {
+    import('./Home.css');
+  }, []);
   return (
     <Layout>
       <main>

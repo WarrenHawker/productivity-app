@@ -1,22 +1,20 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import TasksView from './views/tasks/TasksView';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import HomeView from './views/home/HomeView';
+import TasksView from './views/Tasks/Tasks';
+import HomeView from './views/Home/Home';
+import ReactDOM from 'react-dom/client';
+import './global.css';
 
 const App = () => {
-  const queryClient = new QueryClient();
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route>
-            <Route index element={<HomeView />} />
-            <Route path="/tasks" element={<TasksView />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </QueryClientProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route>
+          <Route index element={<HomeView />} />
+          <Route path="/tasks" element={<TasksView />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 
-export default App;
+ReactDOM.createRoot(document.getElementById('root')!).render(<App />);

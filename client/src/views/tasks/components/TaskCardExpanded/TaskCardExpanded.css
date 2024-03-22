@@ -1,0 +1,9 @@
+.task-expanded-header {
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--color-bg-light);
+}
+
+.task-expanded input {
+  font-size: inherit;
+}
