@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy } from 'react';
 import Layout from '../../components/Layout/Layout';
-import Overlay from '../../components/Overlay/Overlay';
 import { TaskData } from '../../types/task';
 import { fetchData } from '../../utils/functions';
 import TaskCard from './components/TaskCard/TaskCard';
 import TaskCardExpanded from './components/TaskCardExpanded/TaskCardExpanded';
+
+const Overlay = lazy(() => import('../../components/Overlay/Overlay'));
 
 type Tasks = {
   tasks: TaskData[];

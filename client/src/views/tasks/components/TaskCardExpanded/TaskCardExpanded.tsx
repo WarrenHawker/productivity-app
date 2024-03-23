@@ -1,8 +1,12 @@
-import { useEffect, useState } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import { TaskData, TaskPriority, TaskStatus } from '../../../../types/task';
 import { MarkdownRenderer } from '../../../../components/Markdown/Markdown';
-import { Editable, useEditor } from '@wysimark/react';
+import { useEditor } from '@wysimark/react';
 import { formatDateForInput } from '../../../../utils/functions';
+
+const Editable = lazy(() =>
+  import('@wysimark/react').then((module) => ({ default: module.Editable }))
+);
 
 type Props = {
   data: TaskData | null;
@@ -17,8 +21,6 @@ const TaskCardExpanded = ({ data }: Props) => {
   const [status, setStatus] = useState<TaskStatus>();
   const [dueDate, setDueDate] = useState<string>('');
   const editor = useEditor({});
-
-  console.log(dueDate);
 
   useEffect(() => {
     import('./TaskCardExpanded.css');
@@ -35,6 +37,8 @@ const TaskCardExpanded = ({ data }: Props) => {
         setDueDate('');
       }
     }
+
+    setEditing(false);
   }, [data]);
 
   const saveEdits = () => {};
@@ -133,7 +137,9 @@ const TaskCardExpanded = ({ data }: Props) => {
         disabled={!editing}
       />
       {editing ? (
-        <Editable editor={editor} value={content} onChange={setContent} />
+        <Suspense fallback={<div>Loading editor...</div>}>
+          <Editable editor={editor} value={content} onChange={setContent} />
+        </Suspense>
       ) : (
         <MarkdownRenderer children={data?.content} />
       )}
