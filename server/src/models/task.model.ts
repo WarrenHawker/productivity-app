@@ -36,6 +36,11 @@ const taskSchema: Schema<ITask> = new Schema<ITask>({
     enum: ['not started', 'started', 'completed'],
     default: 'not started' as TaskStatus,
   },
+  isCompleted: {
+    type: Boolean,
+    default: false,
+    index: true,
+  },
 });
 
 taskSchema.plugin(paginate);

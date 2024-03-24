@@ -12,6 +12,7 @@ export interface ITask extends Document {
   priority: TaskPriority;
   due_date?: Date;
   status: TaskStatus;
+  isCompleted: boolean;
 }
 
 export interface TaskSearchData {
@@ -30,4 +31,5 @@ export interface TaskUdateData {
   status?: TaskStatus;
   due_date?: Date;
   updated_on: Date;
+  isCompleted?: boolean;
 }
