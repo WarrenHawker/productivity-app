@@ -4,6 +4,7 @@ import { ErrorReturn } from '../../types/error-return';
 import validator from 'validator';
 import { TaskPriority, TaskStatus, TaskUdateData } from '../../types/task';
 import { isTaskPriority, isTaskStatus } from '../../utils/functions';
+import { redisClient } from '../../lib/client.redis';
 
 const { isEmpty, escape, isDate } = validator;
 
@@ -96,6 +97,14 @@ export const updateTask = async (req: Request, res: Response) => {
       res.status(404).json(error);
       return;
     } else {
+      // If non-completed task, sync Redis database
+      if (!task.isCompleted) {
+        await redisClient.hSet(
+          'tasks',
+          taskId.toString(),
+          JSON.stringify(task)
+        );
+      }
       res.status(200).json(task);
       return;
     }

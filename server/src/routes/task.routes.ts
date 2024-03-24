@@ -7,7 +7,7 @@ import { authenticate } from '../middleware/require-auth.middleware';
 
 export const router = express.Router();
 
-// router.use(authenticate);
+router.use(authenticate);
 
 router.get('/', getTasks);
 

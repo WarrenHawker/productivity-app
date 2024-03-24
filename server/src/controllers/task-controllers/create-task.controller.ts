@@ -4,6 +4,7 @@ import validator from 'validator';
 import { isTaskPriority, isTaskStatus } from '../../utils/functions';
 import { TaskPriority, TaskStatus } from '../../types/task';
 import { Task } from '../../models/task.model';
+import { redisClient } from '../../lib/client.redis';
 
 const { isEmpty, escape, isDate } = validator;
 
@@ -106,6 +107,10 @@ export const createTask = async (req: Request, res: Response) => {
 
   try {
     const task = await Task.create(taskData);
+    //if task is non-completed, sync to redis
+    if (!task.isCompleted) {
+      await redisClient.hSet('tasks', task.id.toString(), JSON.stringify(task));
+    }
     res.status(201).json(task);
   } catch (err) {
     const error: ErrorReturn = {
